@@ -22,9 +22,9 @@ def display():
 def user_input(round):
 
     if(round%2==0):
-        field_number = input("Gracz O podaj pole: ")
+        field_number = input("Player O enter the field: ")
     else:
-        field_number = input("Gracz X podaj pole: ")
+        field_number = input("Player X enter the field: ")
     return field_number
 
 def board_update(round, user_input):
@@ -59,18 +59,16 @@ def game_status_chck():
 
 def check_winner(winner):
     if(winner != "Null"):
-        print("Wygral gracz: " + winner)
+        print("Player " + winner + " won!")
     else:
-        print("Remis")
+        print("Draw!!!")
 
 def valid_field(round):
     while True:
         numInput = int(user_input(round))
-        print("Pole: " + fields[numInput - 1])
         if (fields[numInput - 1] == "X" or fields[numInput - 1] == "O"):
-            print("Pole jest juz zajete")
+            print("This field is already taken!")
         else:
-            print("OK")
             return numInput
 
 init_game(winner, round)
