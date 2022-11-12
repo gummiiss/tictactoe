@@ -1,76 +1,76 @@
-figury = ["1","2","3","4","5","6","7","8","9"]
-plansza = [1,2,3,4,5,6,7,8,9]
-runda = 1
-wynik = "Null"
+fields = ["1","2","3","4","5","6","7","8","9"]
+board = [1,2,3,4,5,6,7,8,9]
+round = 1
+winner = "Null"
 
-def initGame(wynik, runda):
-    while wynik == "Null":
-        print("Runda: " + str(runda))
+def init_game(winner, round):
+    while winner == "Null":
+        print("Round: " + str(round))
         display()
-        boardUpdate(runda,validField(runda))
-        wynik = gameStatusChck()
-        runda += 1
-    checkWinner(wynik)
+        board_update(round,valid_field(round))
+        winner = game_status_chck()
+        round += 1
+    check_winner(winner)
 
 def display():
-    for pole in plansza:
+    for pole in board:
         if (pole % 3 == 0):
-            print(figury[pole - 1])
+            print(fields[pole - 1])
         else:
-            print(figury[pole - 1], end='\t')
+            print(fields[pole - 1], end='\t')
 
-def userInput(runda):
+def user_input(round):
 
-    if(runda%2==0):
-        nrPola = input("Gracz O podaj pole: ")
+    if(round%2==0):
+        field_number = input("Gracz O podaj pole: ")
     else:
-        nrPola = input("Gracz X podaj pole: ")
-    return nrPola
+        field_number = input("Gracz X podaj pole: ")
+    return field_number
 
-def boardUpdate(runda, userInput):
-    if (runda % 2 == 0):
-        figury[userInput-1] = "O"
+def board_update(round, user_input):
+    if (round % 2 == 0):
+        fields[user_input-1] = "O"
     else:
-        figury[userInput-1] = "X"
+        fields[user_input-1] = "X"
 
-def gameStatusChck():
-    if(not all(element == 'X' for element in figury[0:3]) and not all(element == 'O' for element in figury[0:3])):
-        if(not all(element == 'X' for element in figury[3:6]) and not all(element == 'O' for element in figury[3:6])):
-            if(not all(element == 'X' for element in figury[6:10]) and not all(element == 'O' for element in figury[6:10])):
-                if (not all(element == 'X' for element in figury[::3]) and not all(element == 'O' for element in figury[::3])):
-                    if (not all(element == 'X' for element in figury[2::3]) and not all(element == 'O' for element in figury[2::3])):
-                        if (not all(element == 'X' for element in figury[::4]) and not all(element == 'O' for element in figury[::4])):
-                            if (not all(element == 'X' for element in figury[2:8:2]) and not all(element == 'O' for element in figury[2:8:2])):
+def game_status_chck():
+    if(not all(element == 'X' for element in fields[0:3]) and not all(element == 'O' for element in fields[0:3])):
+        if(not all(element == 'X' for element in fields[3:6]) and not all(element == 'O' for element in fields[3:6])):
+            if(not all(element == 'X' for element in fields[6:10]) and not all(element == 'O' for element in fields[6:10])):
+                if (not all(element == 'X' for element in fields[::3]) and not all(element == 'O' for element in fields[::3])):
+                    if (not all(element == 'X' for element in fields[2::3]) and not all(element == 'O' for element in fields[2::3])):
+                        if (not all(element == 'X' for element in fields[::4]) and not all(element == 'O' for element in fields[::4])):
+                            if (not all(element == 'X' for element in fields[2:8:2]) and not all(element == 'O' for element in fields[2:8:2])):
                                 return "Null"
                             else:
-                                return figury[2]
+                                return fields[2]
                         else:
-                            return figury[0]
+                            return fields[0]
                     else:
-                        return figury[2]
+                        return fields[2]
                 else:
-                    return figury[0]
+                    return fields[0]
             else:
-                return figury[6]
+                return fields[6]
         else:
-            return figury[3]
+            return fields[3]
     else:
-        return figury[0]
+        return fields[0]
 
-def checkWinner(wynik):
-    if(wynik != "Null"):
-        print("Wygral gracz: " + wynik)
+def check_winner(winner):
+    if(winner != "Null"):
+        print("Wygral gracz: " + winner)
     else:
         print("Remis")
 
-def validField(runda):
+def valid_field(round):
     while True:
-        numInput = int(userInput(runda))
-        print("Pole: " + figury[numInput - 1])
-        if (figury[numInput - 1] == "X" or figury[numInput - 1] == "O"):
+        numInput = int(user_input(round))
+        print("Pole: " + fields[numInput - 1])
+        if (fields[numInput - 1] == "X" or fields[numInput - 1] == "O"):
             print("Pole jest juz zajete")
         else:
             print("OK")
             return numInput
 
-initGame(wynik, runda)
+init_game(winner, round)
